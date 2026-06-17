@@ -155,13 +155,111 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(255, 210, 120, 0.55), transparent 60%),
-    radial-gradient(ellipse at 75% 60%, rgba(255, 170, 50, 0.45), transparent 65%),
-    radial-gradient(ellipse at 50% 100%, rgba(90, 40, 5, 0.9), transparent 70%),
-    linear-gradient(180deg, #f5b945 0%, #e89a1f 25%, #b56a0c 60%, #6b3a05 100%);
+    radial-gradient(ellipse at 30% 20%, hsl(calc(var(--beer-h, 38) * 1) 90% 70% / 0.55), transparent 60%),
+    radial-gradient(ellipse at 75% 60%, hsl(calc(var(--beer-h, 38) * 1) 85% 55% / 0.45), transparent 65%),
+    radial-gradient(ellipse at 50% 100%, hsl(calc(var(--beer-h, 38) * 1) 80% 12% / 0.9), transparent 70%),
+    linear-gradient(
+      180deg,
+      hsl(calc(var(--beer-h, 38) * 1) 90% 60%) 0%,
+      hsl(calc(var(--beer-h, 38) * 1) 85% 48%) 25%,
+      hsl(calc(var(--beer-h, 38) * 1) 80% 32%) 60%,
+      hsl(calc(var(--beer-h, 38) * 1) 75% 16%) 100%
+    );
   background-size: 140% 140%, 160% 160%, 140% 140%, 100% 100%;
   animation: liquidShift 14s ease-in-out infinite alternate;
   filter: saturate(1.1);
+}
+
+/* ===== Control panel ===== */
+.beer-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(40, 20, 5, 0.55);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s ease;
+}
+.beer-toggle:hover { background: rgba(40, 20, 5, 0.75); }
+
+.beer-controls {
+  position: fixed;
+  top: 60px;
+  right: 16px;
+  z-index: 20;
+  width: min(280px, calc(100vw - 32px));
+  padding: 16px 18px 18px;
+  border-radius: 16px;
+  background: rgba(30, 15, 5, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #fff8ec;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.beer-controls header h1 {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffe5a8;
+}
+
+.beer-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.beer-controls label > span {
+  font-weight: 500;
+}
+
+.beer-controls small {
+  opacity: 0.75;
+  font-size: 11px;
+}
+
+.beer-controls input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6b3a05, #f5b945);
+  outline: none;
+}
+.beer-controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff8ec;
+  border: 2px solid #b56a0c;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.beer-controls input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff8ec;
+  border: 2px solid #b56a0c;
+  cursor: pointer;
 }
 
 @keyframes liquidShift {
