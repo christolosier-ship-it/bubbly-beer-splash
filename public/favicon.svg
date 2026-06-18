@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Beer splash icon">
+  <rect width="64" height="64" rx="14" fill="#2a1604"/>
+  <path fill="#f7d45d" d="M18 21h28v25a8 8 0 0 1-8 8H26a8 8 0 0 1-8-8z"/>
+  <path fill="#fff1ba" d="M17 16c0-5 4-8 9-6 2-4 9-4 11 0 6-2 11 2 10 8-1 5-6 7-11 5-4 3-10 3-14 0-3 1-5-1-5-7z"/>
+  <circle cx="27" cy="33" r="3" fill="#fff7cf" opacity=".75"/>
+  <circle cx="38" cy="41" r="2" fill="#fff7cf" opacity=".7"/>
+</svg>
