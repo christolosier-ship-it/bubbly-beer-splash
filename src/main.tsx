@@ -1,7 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+
 import App from "./App";
-import "./styles.css";
+import "./global.css";
 
 const renderStartupError = (message: string, error?: unknown) => {
   console.error(message, error);
@@ -36,5 +37,8 @@ try {
     });
   }
 } catch (error) {
-  renderStartupError("Une erreur JavaScript empêche l’affichage de l’application.", error);
+  renderStartupError(
+    "Une erreur JavaScript empêche l’affichage de l’application.",
+    error,
+  );
 }
