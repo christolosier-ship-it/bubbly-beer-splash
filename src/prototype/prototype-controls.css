@@ -1,0 +1,108 @@
+.beer-toggle {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  z-index: 30;
+  padding: 8px 14px;
+  border: 1px solid hsl(0 0% 100% / 0.35);
+  border-radius: 999px;
+  background: hsl(28 60% 8% / 0.55);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.beer-toggle:hover {
+  background: hsl(28 60% 8% / 0.78);
+}
+
+.beer-toggle:active {
+  transform: scale(0.97);
+}
+
+.beer-controls {
+  position: fixed;
+  top: calc(max(16px, env(safe-area-inset-top)) + 44px);
+  right: max(16px, env(safe-area-inset-right));
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(280px, calc(100vw - 32px));
+  padding: 16px 18px 18px;
+  border: 1px solid hsl(0 0% 100% / 0.18);
+  border-radius: 16px;
+  background: hsl(28 60% 6% / 0.62);
+  color: #fff8ec;
+  box-shadow: 0 12px 40px hsl(0 0% 0% / 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.beer-controls h1 {
+  margin: 0;
+  color: #ffe5a8;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.beer-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.beer-controls label > span {
+  font-weight: 500;
+}
+
+.beer-controls small {
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+.beer-controls input[type="range"] {
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background: linear-gradient(90deg, #2a1604, #b56a0c, #f5b945);
+}
+
+.beer-controls input[type="range"]::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #b56a0c;
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: #fff8ec;
+  box-shadow: 0 2px 6px hsl(0 0% 0% / 0.35);
+  cursor: pointer;
+}
+
+.beer-controls input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #b56a0c;
+  border-radius: 50%;
+  background: #fff8ec;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .beer-controls {
+    width: min(260px, calc(100vw - 24px));
+    padding: 14px 14px 16px;
+  }
+}
