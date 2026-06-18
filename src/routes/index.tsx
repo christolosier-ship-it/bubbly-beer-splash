@@ -179,12 +179,10 @@ function makeFoam(count: number, seed: number): FoamBubble[] {
  * Hooks
  * ============================================================ */
 function useViewportTier(): "sm" | "md" | "lg" {
-  const [tier, setTier] = useState<"sm" | "md" | "lg">(() => {
-    if (typeof window === "undefined") return "lg";
-    const w = window.innerWidth;
-    return w < 480 ? "sm" : w < 1024 ? "md" : "lg";
-  });
+  const [tier, setTier] = useState<"sm" | "md" | "lg">("lg");
   useEffect(() => {
+    const w0 = window.innerWidth;
+    setTier(w0 < 480 ? "sm" : w0 < 1024 ? "md" : "lg");
     const onR = () => {
       const w = window.innerWidth;
       setTier(w < 480 ? "sm" : w < 1024 ? "md" : "lg");
