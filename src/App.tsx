@@ -1,18 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Bière – Animation" },
-      { name: "description", content: "Fond animé immersif de bière : liquide, bulles, mousse." },
-      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { property: "og:title", content: "Bière – Animation" },
-      { property: "og:description", content: "Fond animé immersif de bière." },
-    ],
-  }),
-  component: Index,
-});
 
 /* ============================================================
  * Palette de bières – interpolée le long du slider 0..100
@@ -34,19 +20,109 @@ type BeerStop = {
 };
 
 const BEER_STOPS: BeerStop[] = [
-  { t: 0,   name: "Stout",       top: [22, 55, 10], mid: [20, 70, 5],  bot: [20, 85, 2],  glow: [28, 70, 22], rim: [35, 80, 35], foamHi: [32, 25, 78], foamMid: [30, 30, 68], foamLo: [28, 35, 55], lightness: 0.05 },
-  { t: 15,  name: "Brune",       top: [24, 75, 20], mid: [22, 80, 12], bot: [20, 85, 6],  glow: [34, 75, 35], rim: [38, 85, 48], foamHi: [34, 35, 84], foamMid: [32, 38, 74], foamLo: [30, 40, 62], lightness: 0.18 },
-  { t: 30,  name: "Kriek",       top: [4,  78, 32], mid: [2,  85, 20], bot: [358,90, 10], glow: [12, 85, 50], rim: [18, 90, 60], foamHi: [14, 55, 90], foamMid: [12, 55, 82], foamLo: [10, 50, 70], lightness: 0.35 },
-  { t: 45,  name: "Sour orange", top: [24, 90, 52], mid: [22, 92, 36], bot: [20, 92, 20], glow: [32, 95, 65], rim: [38, 95, 72], foamHi: [30, 80, 94], foamMid: [28, 75, 88], foamLo: [26, 70, 78], lightness: 0.55 },
-  { t: 60,  name: "Ambrée",      top: [38, 90, 56], mid: [34, 88, 42], bot: [30, 85, 24], glow: [44, 95, 70], rim: [48, 95, 78], foamHi: [42, 80, 95], foamMid: [40, 75, 90], foamLo: [36, 65, 80], lightness: 0.65 },
-  { t: 80,  name: "Blonde",      top: [48, 95, 64], mid: [44, 92, 50], bot: [40, 88, 30], glow: [52, 95, 80], rim: [54, 95, 86], foamHi: [50, 85, 97], foamMid: [48, 80, 92], foamLo: [44, 70, 84], lightness: 0.82 },
-  { t: 100, name: "Pâle",        top: [56, 90, 84], mid: [52, 80, 70], bot: [48, 70, 48], glow: [58, 95, 92], rim: [58, 95, 95], foamHi: [54, 60, 98], foamMid: [52, 55, 95], foamLo: [50, 45, 88], lightness: 0.98 },
+  {
+    t: 0,
+    name: "Stout",
+    top: [22, 55, 10],
+    mid: [20, 70, 5],
+    bot: [20, 85, 2],
+    glow: [28, 70, 22],
+    rim: [35, 80, 35],
+    foamHi: [32, 25, 78],
+    foamMid: [30, 30, 68],
+    foamLo: [28, 35, 55],
+    lightness: 0.05,
+  },
+  {
+    t: 15,
+    name: "Brune",
+    top: [24, 75, 20],
+    mid: [22, 80, 12],
+    bot: [20, 85, 6],
+    glow: [34, 75, 35],
+    rim: [38, 85, 48],
+    foamHi: [34, 35, 84],
+    foamMid: [32, 38, 74],
+    foamLo: [30, 40, 62],
+    lightness: 0.18,
+  },
+  {
+    t: 30,
+    name: "Kriek",
+    top: [4, 78, 32],
+    mid: [2, 85, 20],
+    bot: [358, 90, 10],
+    glow: [12, 85, 50],
+    rim: [18, 90, 60],
+    foamHi: [14, 55, 90],
+    foamMid: [12, 55, 82],
+    foamLo: [10, 50, 70],
+    lightness: 0.35,
+  },
+  {
+    t: 45,
+    name: "Sour orange",
+    top: [24, 90, 52],
+    mid: [22, 92, 36],
+    bot: [20, 92, 20],
+    glow: [32, 95, 65],
+    rim: [38, 95, 72],
+    foamHi: [30, 80, 94],
+    foamMid: [28, 75, 88],
+    foamLo: [26, 70, 78],
+    lightness: 0.55,
+  },
+  {
+    t: 60,
+    name: "Ambrée",
+    top: [38, 90, 56],
+    mid: [34, 88, 42],
+    bot: [30, 85, 24],
+    glow: [44, 95, 70],
+    rim: [48, 95, 78],
+    foamHi: [42, 80, 95],
+    foamMid: [40, 75, 90],
+    foamLo: [36, 65, 80],
+    lightness: 0.65,
+  },
+  {
+    t: 80,
+    name: "Blonde",
+    top: [48, 95, 64],
+    mid: [44, 92, 50],
+    bot: [40, 88, 30],
+    glow: [52, 95, 80],
+    rim: [54, 95, 86],
+    foamHi: [50, 85, 97],
+    foamMid: [48, 80, 92],
+    foamLo: [44, 70, 84],
+    lightness: 0.82,
+  },
+  {
+    t: 100,
+    name: "Pâle",
+    top: [56, 90, 84],
+    mid: [52, 80, 70],
+    bot: [48, 70, 48],
+    glow: [58, 95, 92],
+    rim: [58, 95, 95],
+    foamHi: [54, 60, 98],
+    foamMid: [52, 55, 95],
+    foamLo: [50, 45, 88],
+    lightness: 0.98,
+  },
 ];
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-const lerp3 = (a: Triplet, b: Triplet, t: number): Triplet => [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
+const lerp3 = (a: Triplet, b: Triplet, t: number): Triplet => [
+  lerp(a[0], b[0], t),
+  lerp(a[1], b[1], t),
+  lerp(a[2], b[2], t),
+];
 const hsl = ([h, s, l]: Triplet, alpha = 1) =>
-  alpha < 1 ? `hsl(${h.toFixed(1)} ${s.toFixed(1)}% ${l.toFixed(1)}% / ${alpha})` : `hsl(${h.toFixed(1)} ${s.toFixed(1)}% ${l.toFixed(1)}%)`;
+  alpha < 1
+    ? `hsl(${h.toFixed(1)} ${s.toFixed(1)}% ${l.toFixed(1)}% / ${alpha})`
+    : `hsl(${h.toFixed(1)} ${s.toFixed(1)}% ${l.toFixed(1)}%)`;
 
 function pickBeer(t: number) {
   const c = Math.max(0, Math.min(100, t));
@@ -91,16 +167,53 @@ function mulberry32(seed: number) {
 /* ============================================================
  * Particules – types
  * ============================================================ */
-type MicroBubble = { i: number; size: number; left: number; duration: number; delay: number; drift: number; opacity: number; family: 1 | 2 | 3 | 4 };
-type MainBubble = {
-  i: number; size: number; left: number; duration: number; delay: number;
-  drift: number; opacity: number; blur: number; squash: number; family: 1 | 2 | 3 | 4;
-  shineX: number; shineY: number; tint: number;
+type MicroBubble = {
+  i: number;
+  size: number;
+  left: number;
+  duration: number;
+  delay: number;
+  drift: number;
+  opacity: number;
+  family: 1 | 2 | 3 | 4;
 };
-type HeroBubble = { i: number; size: number; left: number; duration: number; delay: number; drift: number; opacity: number; blur: number; tilt: number };
+type MainBubble = {
+  i: number;
+  size: number;
+  left: number;
+  duration: number;
+  delay: number;
+  drift: number;
+  opacity: number;
+  blur: number;
+  squash: number;
+  family: 1 | 2 | 3 | 4;
+  shineX: number;
+  shineY: number;
+  tint: number;
+};
+type HeroBubble = {
+  i: number;
+  size: number;
+  left: number;
+  duration: number;
+  delay: number;
+  drift: number;
+  opacity: number;
+  blur: number;
+  tilt: number;
+};
 type FoamBubble = {
-  i: number; size: number; left: number; top: number; opacity: number;
-  duration: number; delay: number; family: 1 | 2 | 3 | 4; layer: "hi" | "mid" | "lo"; tint: number;
+  i: number;
+  size: number;
+  left: number;
+  top: number;
+  opacity: number;
+  duration: number;
+  delay: number;
+  family: 1 | 2 | 3 | 4;
+  layer: "hi" | "mid" | "lo";
+  tint: number;
 };
 
 function makeMicro(count: number, seed: number): MicroBubble[] {
@@ -165,7 +278,8 @@ function makeFoam(count: number, seed: number): FoamBubble[] {
       size: baseSize,
       left: r() * 100,
       top: topPct,
-      opacity: layer === "hi" ? 0.7 + r() * 0.3 : layer === "mid" ? 0.55 + r() * 0.4 : 0.35 + r() * 0.45,
+      opacity:
+        layer === "hi" ? 0.7 + r() * 0.3 : layer === "mid" ? 0.55 + r() * 0.4 : 0.35 + r() * 0.45,
       duration: 4 + r() * 8,
       delay: -r() * 10,
       family: (1 + Math.floor(r() * 4)) as 1 | 2 | 3 | 4,
@@ -215,18 +329,72 @@ function useReducedMotion(): boolean {
   return rm;
 }
 
+const STORAGE_KEYS = {
+  beerT: "bubbly-beer-splash:beerT",
+  bubbleDensity: "bubbly-beer-splash:bubbleDensity",
+  foamIntensity: "bubbly-beer-splash:foamIntensity",
+  panelOpen: "bubbly-beer-splash:panelOpen",
+} as const;
+
+const clampSetting = (value: unknown, fallback: number, min = 0, max = 100) => {
+  const parsed = typeof value === "number" ? value : Number(value);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.min(max, Math.max(min, parsed));
+};
+
+const readNumberSetting = (key: string, fallback: number) => {
+  if (typeof window === "undefined") return fallback;
+  return clampSetting(window.localStorage.getItem(key), fallback);
+};
+
+const readBooleanSetting = (key: string, fallback: boolean) => {
+  if (typeof window === "undefined") return fallback;
+  const value = window.localStorage.getItem(key);
+  if (value === "true") return true;
+  if (value === "false") return false;
+  return fallback;
+};
+
 /* ============================================================
  * Composant principal
  * ============================================================ */
-function Index() {
-  const [beerT, setBeerT] = useState(60);
-  const [bubbleDensity, setBubbleDensity] = useState(60);
-  const [foamIntensity, setFoamIntensity] = useState(60);
-  const [panelOpen, setPanelOpen] = useState(true);
+export default function App() {
+  const [beerT, setBeerT] = useState(() => readNumberSetting(STORAGE_KEYS.beerT, 60));
+  const [bubbleDensity, setBubbleDensity] = useState(() =>
+    readNumberSetting(STORAGE_KEYS.bubbleDensity, 60),
+  );
+  const [foamIntensity, setFoamIntensity] = useState(() =>
+    readNumberSetting(STORAGE_KEYS.foamIntensity, 60),
+  );
+  const [panelOpen, setPanelOpen] = useState(() =>
+    readBooleanSetting(STORAGE_KEYS.panelOpen, true),
+  );
 
   const tier = useViewportTier();
   const visible = usePageVisible();
   const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    window.localStorage.setItem(STORAGE_KEYS.beerT, String(clampSetting(beerT, 60)));
+  }, [beerT]);
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      STORAGE_KEYS.bubbleDensity,
+      String(clampSetting(bubbleDensity, 60)),
+    );
+  }, [bubbleDensity]);
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      STORAGE_KEYS.foamIntensity,
+      String(clampSetting(foamIntensity, 60)),
+    );
+  }, [foamIntensity]);
+
+  useEffect(() => {
+    window.localStorage.setItem(STORAGE_KEYS.panelOpen, String(panelOpen));
+  }, [panelOpen]);
 
   /* Paliers internes pour ne pas regénérer à chaque pixel du slider */
   const densityStep = Math.round(bubbleDensity / 10) * 10; // pas de 10
@@ -266,10 +434,10 @@ function Index() {
    * - claire : microbulles plus visibles, caustiques plus présentes
    */
   const L = colors.lightness;
-  const microVisibility = 0.25 + L * 0.85;       // 0.25 -> 1.1
-  const causticOpacity = 0.18 + L * 0.45;        // 0.18 -> 0.63
+  const microVisibility = 0.25 + L * 0.85; // 0.25 -> 1.1
+  const causticOpacity = 0.18 + L * 0.45; // 0.18 -> 0.63
   const speedScale = (0.75 + L * 0.45) * (reducedMotion ? 0.25 : 1); // sombre = lent
-  const rimStrength = 0.35 + (1 - L) * 0.55;     // sombre = rim plus fort
+  const rimStrength = 0.35 + (1 - L) * 0.55; // sombre = rim plus fort
 
   /* Variables CSS — regroupées : liquide / bulles / mousse */
   const stageStyle = {
@@ -280,7 +448,10 @@ function Index() {
     ["--liq-glow" as never]: hsl(colors.glow, 0.55),
     ["--liq-glow-soft" as never]: hsl(colors.glow, 0.22),
     ["--liq-rim" as never]: hsl(colors.rim, rimStrength),
-    ["--liq-deep" as never]: hsl([colors.bot[0], colors.bot[1], Math.max(2, colors.bot[2] - 4)] as Triplet, 0.85),
+    ["--liq-deep" as never]: hsl(
+      [colors.bot[0], colors.bot[1], Math.max(2, colors.bot[2] - 4)] as Triplet,
+      0.85,
+    ),
     /* --- BULLES --- */
     ["--bub-tint" as never]: hsl(colors.rim, 0.18),
     ["--bub-core" as never]: hsl([colors.rim[0], 40, 96] as Triplet, 0.9),
@@ -298,11 +469,7 @@ function Index() {
   } as React.CSSProperties;
 
   /* Pause CSS globale quand l'onglet est caché ou prefers-reduced-motion */
-  const stageClass = [
-    "beer-stage",
-    visible ? "" : "is-hidden",
-    reducedMotion ? "is-reduced" : "",
-  ]
+  const stageClass = ["beer-stage", visible ? "" : "is-hidden", reducedMotion ? "is-reduced" : ""]
     .filter(Boolean)
     .join(" ");
 
