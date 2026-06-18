@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - codex/corriger-erreur-404-et-convertir-en-pwa
   workflow_dispatch:
 
 permissions:
@@ -22,21 +21,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund
+
+      - name: Typecheck
+        run: npm run typecheck
+
       - name: Build
         run: npm run build
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+
   deploy:
     environment:
       name: github-pages
