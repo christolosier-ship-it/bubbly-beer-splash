@@ -2,7 +2,9 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - codex/corriger-erreur-404-et-convertir-en-pwa
   workflow_dispatch:
 
 permissions:
